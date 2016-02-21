@@ -1,0 +1,330 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import "vendor/bourbon/bourbon";
+@import "conf";
+@import "vendor/neat/neat";
+
+$navy      : #1F202A;
+$cream     : #FFFEF0;
+$creamMuted: #D2D1C8;
+$creamDark : #8F8F8D;
+$yellow    : #E4B042;
+$red       : #BC4848;
+
+body {
+	font: {
+		family: 'Open Sans', sans-serif;
+		size: 12px;
+	}
+	background: $navy;
+	color: $cream;
+}
+
+input:-webkit-autofill {
+	-webkit-text-fill-color: $creamMuted;
+    -webkit-box-shadow: 0 0 0px 1000px lighten($navy,3%) inset;
+}
+
+.content {
+	@include outer-container(600px);
+	padding-top: 25px;
+	padding-bottom: 25px;
+	transition: height 0.3s ease-in-out;
+}
+
+.row {
+	@include row();
+}
+
+#anAsterism {
+	width: 100%;
+	max-width: 450px;
+	margin: 0 auto 20px;
+	transition: width 2s;
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+
+::-webkit-input-placeholder {
+    color:    $creamDark;
+}
+:-moz-placeholder {
+   color:    $creamDark;
+   opacity:  1;
+}
+::-moz-placeholder {
+   color:    $creamDark;
+   opacity:  1;
+}
+:-ms-input-placeholder {
+   color:    $creamDark;
+}
+:placeholder-shown {
+  color:    $creamDark;
+}
+
+.field {
+	@include span-columns(12 of 12);
+	padding: 10px;
+}
+
+.fieldset {
+	@include span-columns(6 of 12);
+	padding: 10px;
+	@include media(max-width 480px) {
+		@include span-columns(12 of 12);
+	}
+}
+
+.field, .fieldset {
+
+	label {
+		display: block;
+		font: {
+			size: 12px;
+			weight: 700;
+		}
+		margin: 0 0 8px 0;
+
+		.fa {
+			display: none;
+			color: $red;
+		}
+	}
+	input, textarea {
+		width: 100%;
+		font: {
+			family: 'Open Sans', sans-serif;
+			size: 12px;
+		}
+		color: $creamMuted;
+		padding: 12px;
+		border: 2px solid lighten($navy, 15%);
+		background: $navy;
+		border-radius: 3px;
+		outline: transparent;
+		transition: border 0.5s ease-in-out;
+	}
+
+	textarea {
+		height: 250px;
+		line-height: 1.5em;
+	}
+
+	&.isInvalid {
+		.fa {
+			display: inline;
+		}
+	}
+
+}
+
+.optionSelect {
+	margin: 0;
+	padding: 0;
+	border: 2px solid lighten($navy, 15%);
+	border-radius: 3px;
+
+	li {
+		display: block;
+		cursor: pointer;
+		list-style: none;
+		padding: 10px 0px 9px 10px;
+		border-top: 1px solid lighten($navy, 6%);
+
+		&:first-child {
+			border-top: none;
+		}
+
+		.optionToggle {
+			display: inline-block;
+			width: 23px;
+			height: 23px;
+			background: transparent;
+			font-size: 18px;
+			color: $yellow;
+			text-align: center;
+			line-height: 0.9em;
+			border: 2px solid $yellow;
+			border-radius: 100%;
+			vertical-align: middle;
+			margin: 0 5px 0 0;
+			transition: transform 0.3s ease-in-out;
+		}
+
+		.optionLabel {
+			font: {
+				size: 12px;
+				weight: 400;
+			}
+			opacity: 0.5;
+			vertical-align: middle;
+			transition: opacity 0.2s;
+		}
+
+		.optionNotes {
+			font: {
+				size: 12px;
+			}
+			color: lighten($navy, 30%);
+		}
+
+		&.selected {
+			/*background: lighten($navy, 2%);*/
+			.optionToggle {
+				background: $yellow;
+				color: $navy;
+				transform: rotate(135deg);
+			}
+			.optionLabel {
+				font-weight: 700;
+				opacity: 0.8;
+			}
+		}
+
+	}
+}
+
+.controls {
+	@include span-columns(12 of 12);
+	padding: 10px 0 60px 0;
+
+	button {
+		display: block;
+		position: fixed;
+		top: 430px;
+		left: 50%;
+		transform: translate(-50%,0);
+		width: 100px;
+		height: 37px;
+		font-size: 14px;
+		color: $navy;
+		background: $yellow;
+		padding: 0;
+		border: 0;
+		border-radius: 3px;
+		overflow: hidden;
+		margin: 0 auto;
+		outline: none;
+		transition: all 0.3s ease-in-out;
+		transition-property: background, border-radius, width, height;
+		cursor: pointer;
+
+		&.static {
+			position: static;
+			transform: none;
+		}
+
+		.fa-lg, .fa-3x {
+			line-height: 36px;
+			transition: line-height 0.3s ease-in-out;
+		}
+
+		&.circle {
+			background: $red;
+			width: 100px;
+			height: 100px;
+			padding: 0;
+			text-align: center;
+			border-radius: 100%;
+
+			&:hover {
+				background: lighten($red, 10%);
+			}
+
+			.fa-lg, .fa-3x {
+				line-height: 103px;
+			}
+		}
+
+		&:hover {
+			background: darken($yellow, 10%);
+		}
+
+	}
+}
+
+.prompt {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 300px;
+	padding: 10px;
+	border-radius: 3px;
+	
+	.prompt-title {
+		font-weight: 700;
+	}
+
+	&.error {
+		background: $red;
+		ul {
+			display: block;
+			margin: 0;
+			padding: 10px 0 0;
+			li {
+				display: block;
+				list-style: none;
+				padding: 8px 0;
+				border-top: 1px solid lighten($red, 5%);
+				&:first-child {
+					border-top: 2px solid lighten($red, 10%);
+				}
+				.fa-exclamation {
+					color: darken($red, 10%);
+				}
+			}
+		}
+	}
+
+}
+
+@-moz-document url-prefix() {
+    .optionSelect li .optionToggle {
+    	line-height: 19px;
+    }
+}
+
+#foot {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: $navy;
+	border-top: 1px solid lighten($navy, 5%);
+	padding: 10px;
+	
+	#copyright {
+		@include span-columns(6 of 12);
+		color: lighten($navy, 20%);
+		line-height: 25px;
+
+		.reserved {
+			@include media(max-width 480px) {
+				display: none;
+			}
+		}
+	}
+
+	#social {
+		@include span-columns(6 of 12);
+		text-align: right;
+
+		a {
+			display: inline-block;
+			position: relative;
+			color: lighten($navy, 20%);
+			margin: 0 0 0 10px;
+
+			&:first-child {
+				margin: 0 0 0 0;
+			}
+
+			&:hover {
+				color: lighten($navy, 15%);
+			}
+		}
+	}
+	
+}
